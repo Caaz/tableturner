@@ -10,6 +10,7 @@ const webhook = new WebhookClient({ id: secrets.webhook_id, token: secrets.webho
 
 turntable.on('ready', _ => {
     turntable.roomRegister(secrets.room_id);
+    turntable.setAsBot();
 });
 
 turntable.on('newsong', data => {
@@ -32,11 +33,12 @@ turntable.on('newsong', data => {
         embed.setDescription('https://youtu.be/' + song.sourceid);
     }
 
-    webhook.send({
+    let sent = webhook.send({
         username: 'Turntable.fm',
         avatarURL: 'https://turntable.fm/roommanager_assets/stickers/turntable.png',
         embeds: [embed],
     });
+    console.log(sent);
 });
 
 turntable.on('update_votes', (data) => { 
