@@ -1,0 +1,18 @@
+{
+  "name": "djstt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "lint": "xo . --fix"
+  },
+  "author": "Daniel Caaz",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^13.8.0",
+    "ttapi": "^4.0.3"
+  },
+  "devDependencies": {
+    "xo": "^0.49.0"
+  }
+}
