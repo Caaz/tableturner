@@ -9,6 +9,21 @@ const webhook = new WebhookClient({id: secrets.webhook_id, token: secrets.webhoo
 // Current bop status
 let bop = false;
 
+const users = {};
+
+async function getUserData(userid) {
+	return new Promise((resolve, _) => {
+		if (users[userid]) {
+			resolve(users[userid]);
+		}
+
+		turntable.getProfile(userid, data => {
+			users[userid] = data;
+			resolve(data);
+		});
+	});
+}
+
 turntable.on('ready', _ => {
 	turntable.roomRegister(secrets.room_id, _ => {
 		turntable.setAsBot();
@@ -59,8 +74,9 @@ turntable.on('update_votes', data => {
 		});
 	}
 });
+
 turntable.on('snagged', data => {
-	turntable.getProfile(data.userid, user => {
+	getUserData(data.userid).then(user => {
 		turntable.speak(`${user.name} stole this!`);
 	});
 });
