@@ -10,8 +10,9 @@ const webhook = new WebhookClient({id: secrets.webhook_id, token: secrets.webhoo
 let bop = false;
 
 turntable.on('ready', _ => {
-	turntable.roomRegister(secrets.room_id);
-	turntable.setAsBot();
+	turntable.roomRegister(secrets.room_id, _ => {
+		turntable.setAsBot();
+	});
 });
 
 turntable.on('newsong', data => {
@@ -50,10 +51,12 @@ turntable.on('update_votes', data => {
 	// Don't count the bot or the dj
 	const listeners = details.listeners - 2;
 	if ((details.upvotes / listeners > 0.6) && (!bop)) {
-		console.log('bopped!');
-		turntable.speak('This song\'s a ' + banger[Math.floor(Math.random() * banger.length)]);
-		turntable.bop();
 		bop = true;
+		turntable.vote('up', voted => {
+			if (voted.success) {
+				turntable.speak('This song\'s a ' + banger[Math.floor(Math.random() * banger.length)]);
+			}
+		});
 	}
 });
 turntable.on('snagged', data => {
