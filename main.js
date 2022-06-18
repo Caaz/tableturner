@@ -1,15 +1,33 @@
 const {MessageEmbed, WebhookClient} = require('discord.js');
 const TTAPI = require('ttapi');
+const sprintf = require('sprintf-js').sprintf;
 
 const secrets = require('./secrets.json');
+const phrases = require('./phrases.json');
 
 const turntable = new TTAPI(secrets.AUTH, secrets.USERID, secrets.room_id);
 const webhook = new WebhookClient({id: secrets.webhook_id, token: secrets.webhook_token});
 
 // Current bop status
 let bop = false;
-
+let current_song;
 const users = {};
+
+function rand_element(array) {
+	return array[Math.floor(Math.random() * array.length)];
+}
+function pander() {
+	const phrase = rand_element(phrases.pander);
+	const line = sprintf(phrase, {
+		"dj": current_song ? current_song.djname : "This DJ",
+		"bop": rand_element(phrases.bop),
+		"song": current_song ? current_song.metadata : {
+			"song": "This song",
+			"artist": "this artist"
+		}
+	})
+	turntable.speak(line);
+}
 
 async function getUserData(userid) {
 	return new Promise((resolve, _) => {
@@ -32,7 +50,7 @@ turntable.on('ready', _ => {
 
 turntable.on('newsong', data => {
 	const song = data.room.metadata.current_song;
-
+	current_song = song;
 	console.log(song);
 	const minutes = String(Math.floor(song.metadata.length / 60));
 	const seconds = String(Math.floor(song.metadata.length % 60)).padStart(2, 0);
@@ -62,14 +80,13 @@ turntable.on('newsong', data => {
 turntable.on('update_votes', data => {
 	const details = data.room.metadata;
 	console.log('Vote', details);
-	const banger = ['banger', 'bop', 'whole vibe', 'hit'];
 	// Don't count the bot or the dj
 	const listeners = details.listeners - 2;
 	if ((details.upvotes / listeners > 0.6) && (!bop)) {
 		bop = true;
 		turntable.vote('up', voted => {
 			if (voted.success) {
-				turntable.speak('This song\'s a ' + banger[Math.floor(Math.random() * banger.length)]);
+				pander();
 			}
 		});
 	}

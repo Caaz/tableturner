@@ -1,0 +1,20 @@
+{
+    "pander": [
+        "This song's a %(bop)s",
+        "Happy Pride to this %(bop)s",
+        "I'll drink to a %(bop)s like this",
+        "%(dj)s's playing a %(bop)s for once!",
+        "%(song.song)s is such a %(bop)s",
+        "I love %(song.artist)s",
+        "%(song.song)s confirmed a %(bop)s"
+    ],
+    "bop": [
+        "bop",
+        "great choice",
+        "hit",
+        "vibe",
+        "whole vibe",
+        "pander",
+        "happy pride"
+    ]
+}
