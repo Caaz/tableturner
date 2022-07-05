@@ -6,7 +6,8 @@
         "%(dj)s's playing a %(bop)s for once!",
         "%(song.song)s is such a %(bop)s",
         "I love %(song.artist)s",
-        "%(song.song)s confirmed a %(bop)s"
+        "%(song.song)s confirmed a %(bop)s",
+        "%(dj)s's bringing the %(bop)ss today"
     ],
     "bop": [
         "bop",
