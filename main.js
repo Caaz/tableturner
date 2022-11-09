@@ -17,16 +17,18 @@ function rand_element(array) {
 	return array[Math.floor(Math.random() * array.length)];
 }
 function pander() {
-	const phrase = rand_element(phrases.pander);
-	const line = sprintf(phrase, {
-		"dj": current_song ? current_song.djname : "This DJ",
-		"bop": rand_element(phrases.bop),
-		"song": current_song ? current_song.metadata : {
-			"song": "This song",
-			"artist": "this artist"
-		}
-	})
-	turntable.speak(line);
+	var phrase = rand_element(phrases.pander);
+	while (phrase.includes("%(")) {
+		phrase = sprintf(phrase, {
+			"dj": current_song ? current_song.djname : "This DJ",
+			"bop": rand_element(phrases.bop),
+			"song": current_song ? current_song.metadata : {
+				"song": "This song",
+				"artist": "this artist"
+			}
+		})
+	}
+	turntable.speak(phrase);
 }
 
 async function getUserData(userid) {
