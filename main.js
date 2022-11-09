@@ -47,8 +47,8 @@ async function getUserData(userid) {
 turntable.on('ready', _ => {
 	turntable.roomRegister(secrets.room_id, _ => {
 		turntable.setAsBot();
+		turntable.speak("I lived");
 	});
-	turntable.speak("I lived");
 });
 
 turntable.on('newsong', data => {
