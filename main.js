@@ -72,7 +72,7 @@ turntable.on('newsong', data => {
 	}
 
 	const sent = webhook.send({
-		username: 'Turntable.fm',
+		username: 'Deepcuts.fm',
 		embeds: [embed],
 	});
 	console.log(sent);
