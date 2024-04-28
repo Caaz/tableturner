@@ -7,7 +7,8 @@
         "%(song.song)s is such a %(bop)s",
         "I love %(song.artist)s",
         "%(song.song)s confirmed a %(bop)s",
-        "%(dj)s's bringing the %(bop)ss today"
+        "%(dj)s's bringing the %(bop)ss today",
+        "Huh, so %(dj)s has a good %(bop)s?"
     ],
     "bop": [
         "bop",
@@ -21,6 +22,10 @@
         "masterpiece",
         "human song",
         "%(bop) %(bop)",
-        "frivolous %(bop)"
+        "frivolous %(bop)",
+        "1984",
+        "gyatt",
+        "skibidi",
+        "toilet"
     ]
 }
