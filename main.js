@@ -58,8 +58,8 @@ turntable.on('newsong', data => {
 	const minutes = String(Math.floor(song.metadata.length / 60));
 	const seconds = String(Math.floor(song.metadata.length % 60)).padStart(2, 0);
 	const embed = new MessageEmbed()
-		.setTitle(song.djname + ' via Turntable.fm')
-		.setURL('https://turntable.fm/' + secrets.room_id)
+		.setTitle(song.djname + ' via Deepcut.fm')
+		.setURL('https://deepcut.fm/' + secrets.room_id)
 		.addFields(
 			{name: 'Artist', value: song.metadata.artist, inline: true},
 			{name: 'Title', value: song.metadata.song, inline: true},
@@ -73,7 +73,6 @@ turntable.on('newsong', data => {
 
 	const sent = webhook.send({
 		username: 'Turntable.fm',
-		avatarURL: 'https://turntable.fm/roommanager_assets/stickers/turntable.png',
 		embeds: [embed],
 	});
 	console.log(sent);
